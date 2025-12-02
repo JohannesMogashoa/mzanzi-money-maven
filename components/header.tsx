@@ -1,5 +1,6 @@
 "use client";
 
+import { Authenticated, Unauthenticated } from "convex/react";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -9,6 +10,7 @@ import {
 	NavigationMenuTrigger,
 	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import { SignInButton, UserButton } from "@clerk/nextjs";
 
 import { Brain } from "lucide-react";
 import { Button } from "./ui/button";
@@ -28,60 +30,67 @@ const Header = () => {
 						Ascendia
 					</span>
 				</div>
-				<NavigationMenu
-					viewport={isMobile}
-					className="hidden md:flex gap-8 items-center"
-				>
-					<NavigationMenuList>
-						<NavigationMenuItem>
-							<NavigationMenuLink
-								asChild
-								className={navigationMenuTriggerStyle()}
-							>
-								<Link
-									href="/"
-									className="text-muted-foreground hover:text-foreground transition"
+				<Authenticated>
+					<UserButton />
+				</Authenticated>
+				<Unauthenticated>
+					<NavigationMenu
+						viewport={isMobile}
+						className="hidden md:flex gap-8 items-center"
+					>
+						<NavigationMenuList>
+							<NavigationMenuItem>
+								<NavigationMenuLink
+									asChild
+									className={navigationMenuTriggerStyle()}
 								>
-									Home
-								</Link>
-							</NavigationMenuLink>
-						</NavigationMenuItem>
-						<NavigationMenuItem>
-							<NavigationMenuLink
-								asChild
-								className={navigationMenuTriggerStyle()}
-							>
-								<Link
-									href="#"
-									className="text-muted-foreground hover:text-foreground transition"
+									<Link
+										href="/"
+										className="text-muted-foreground hover:text-foreground transition"
+									>
+										Home
+									</Link>
+								</NavigationMenuLink>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<NavigationMenuLink
+									asChild
+									className={navigationMenuTriggerStyle()}
 								>
-									Features
-								</Link>
-							</NavigationMenuLink>
-						</NavigationMenuItem>
-						<NavigationMenuItem>
-							<NavigationMenuLink
-								asChild
-								className={navigationMenuTriggerStyle()}
-							>
-								<Link
-									href="#"
-									className="text-muted-foreground hover:text-foreground transition"
+									<Link
+										href="#"
+										className="text-muted-foreground hover:text-foreground transition"
+									>
+										Features
+									</Link>
+								</NavigationMenuLink>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<NavigationMenuLink
+									asChild
+									className={navigationMenuTriggerStyle()}
 								>
-									How It Works
-								</Link>
-							</NavigationMenuLink>
-						</NavigationMenuItem>
-						<NavigationMenuItem>
-							<Button
-								variant="default"
-								className="bg-primary hover:bg-primary/90 text-primary-foreground"
-							>
-								<Link href="#">Get Started</Link>
-							</Button>
-						</NavigationMenuItem>
-					</NavigationMenuList>
-				</NavigationMenu>
+									<Link
+										href="#"
+										className="text-muted-foreground hover:text-foreground transition"
+									>
+										How It Works
+									</Link>
+								</NavigationMenuLink>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<SignInButton>
+									<Button
+										variant="default"
+										className="bg-primary hover:bg-primary/90 text-primary-foreground"
+									>
+										<Link href="#">Get Started</Link>
+									</Button>
+								</SignInButton>
+							</NavigationMenuItem>
+						</NavigationMenuList>
+					</NavigationMenu>
+				</Unauthenticated>
 			</div>
 		</header>
 

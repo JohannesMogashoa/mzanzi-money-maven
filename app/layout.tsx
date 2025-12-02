@@ -11,6 +11,7 @@ import {
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { Analytics } from "@vercel/analytics/next";
+import ConvexClientProvider from "@/lib/ConvexClientProvider";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import type { Metadata } from "next";
@@ -20,27 +21,27 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-	title: "Financial Assistant - Investec",
+	title: "Financial Assistant - Ascendia",
 	description:
 		"Intelligent financial insights powered by AI to help you understand spending patterns and improve financial behavior",
-	generator: "v0.app",
 	icons: {
 		icon: [
 			{
-				url: "/icon-light-32x32.png",
+				url: "/favicon-32x32.png",
 				media: "(prefers-color-scheme: light)",
+				type: "image/png",
+				sizes: "32x32",
 			},
 			{
-				url: "/icon-dark-32x32.png",
+				url: "/favicon-16x16.png",
 				media: "(prefers-color-scheme: dark)",
-			},
-			{
-				url: "/icon.svg",
-				type: "image/svg+xml",
+				type: "image/png",
+				sizes: "16x16",
 			},
 		],
-		apple: "/apple-icon.png",
+		apple: "/apple-touch-icon.png",
 	},
+	manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({
@@ -49,17 +50,19 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ClerkProvider>
-			<html lang="en">
-				<body className={`font-sans antialiased`}>
-					<Header />
-					<main className="min-h-screen bg-background">
-						{children}
-					</main>
-					<Footer />
-					<Analytics />
-				</body>
-			</html>
-		</ClerkProvider>
+		<html lang="en">
+			<body className={`font-sans antialiased`}>
+				<ClerkProvider>
+					<ConvexClientProvider>
+						<Header />
+						<main className="min-h-screen bg-background">
+							{children}
+						</main>
+						<Footer />
+						<Analytics />
+					</ConvexClientProvider>
+				</ClerkProvider>
+			</body>
+		</html>
 	);
 }
