@@ -1,13 +1,7 @@
-"use client";
-
-import { ArrowRight, Brain, Link, TrendingUp, Zap } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
+import { Brain, TrendingUp, Zap } from "lucide-react";
+import { CTAButton, HeroButtons } from "@/components/home/button-stack";
 
 export default function Home() {
-	const router = useRouter();
-
 	return (
 		<div className="min-h-screen bg-linear-to-br from-background via-background to-card">
 			{/* Hero Section */}
@@ -28,24 +22,7 @@ export default function Home() {
 								habits.
 							</p>
 						</div>
-						<div className="flex flex-col sm:flex-row gap-4">
-							<Button
-								onClick={() => router.push("/dashboard")}
-								className="bg-primary hover:bg-primary/90 text-primary-foreground h-12 px-8 text-base"
-							>
-								Explore Dashboard
-								<ArrowRight className="ml-2 w-4 h-4" />
-							</Button>
-							<Button
-								onClick={() =>
-									router.push("/dashboard/insights")
-								}
-								variant="outline"
-								className="border-border text-foreground hover:bg-card h-12 px-8 text-base"
-							>
-								View Insights
-							</Button>
-						</div>
+						<HeroButtons />
 					</div>
 
 					{/* Hero Visual */}
@@ -165,10 +142,7 @@ export default function Home() {
 						Join thousands of Investec clients already using
 						AI-powered insights to build better financial behavior.
 					</p>
-					<Button className="bg-primary hover:bg-primary/90 text-primary-foreground h-12 px-8 text-base">
-						Start Your Journey
-						<ArrowRight className="ml-2 w-4 h-4" />
-					</Button>
+					<CTAButton />
 				</div>
 			</section>
 		</div>
