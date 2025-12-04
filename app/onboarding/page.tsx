@@ -29,13 +29,13 @@ const OnboardingPage = () => {
 
 	const handleSubmit = async (formData: FormData) => {
 		const res = await completeOnboarding(formData);
-		if (res?.message) {
-			// Forces a token refresh and refreshes the `User` object
+
+		if (res.message) {
 			await user?.reload();
-			router.push("/dashboard");
+			router.replace("/dashboard");
 		}
-		if (res?.error) {
-			setError(res?.error);
+		if (res.error) {
+			setError(res.error);
 		}
 	};
 
@@ -67,6 +67,8 @@ const OnboardingPage = () => {
 								<Input
 									id="clientId"
 									type="text"
+									name="clientId"
+									autoComplete="off"
 									placeholder="your-client-id"
 									required
 								/>
@@ -79,6 +81,7 @@ const OnboardingPage = () => {
 									id="clientSecret"
 									type="password"
 									name="clientSecret"
+									autoComplete="off"
 									placeholder="your-client-secret"
 									required
 								/>
@@ -91,6 +94,7 @@ const OnboardingPage = () => {
 									type="password"
 									id="apiKey"
 									name="apiKey"
+									autoComplete="off"
 									placeholder="your-api-key"
 									required
 								/>
